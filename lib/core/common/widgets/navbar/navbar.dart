@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:snake_bite_app/features/history/history.dart';
+import 'package:snake_bite_app/features/home/home.dart';
+import 'package:snake_bite_app/features/settings/settings.dart';
+import 'package:snake_bite_app/features/support/support.dart';
 import 'package:water_drop_nav_bar/water_drop_nav_bar.dart';
 
 class Navbar extends StatefulWidget {
@@ -25,9 +29,10 @@ class _NavbarState extends State<Navbar> {
           physics: const NeverScrollableScrollPhysics(),
           controller: pageController,
           children: const [
-            Center(child: Text('Page 1')),
-            Center(child: Text('Page 2')),
-            Center(child: Text('Page 3')),
+            HomeScreen(),
+            HistoryScreen(),
+            SupportScreen(),
+            SettingsScreen()
           ],
         ),
         bottomNavigationBar: WaterDropNavBar(
@@ -44,12 +49,16 @@ class _NavbarState extends State<Navbar> {
           selectedIndex: selectedIndex,
           barItems: [
             BarItem(
-              filledIcon: Icons.bookmark_rounded,
-              outlinedIcon: Icons.bookmark_border_rounded,
+              filledIcon: Icons.home_rounded,
+              outlinedIcon: Icons.home_outlined,
             ),
             BarItem(
-              filledIcon: Icons.favorite_rounded,
-              outlinedIcon: Icons.favorite_border_rounded,
+              filledIcon: Icons.history_rounded,
+              outlinedIcon: Icons.history_outlined,
+            ),
+            BarItem(
+              filledIcon: Icons.support_rounded,
+              outlinedIcon: Icons.support_outlined,
             ),
             BarItem(
               filledIcon: Icons.settings_rounded,
