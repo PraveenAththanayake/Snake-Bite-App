@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:snake_bite_app/core/theme/color_palette.dart';
 import 'package:snake_bite_app/features/history/history.dart';
 import 'package:snake_bite_app/features/home/home.dart';
 import 'package:snake_bite_app/features/settings/settings.dart';
@@ -36,6 +37,7 @@ class _NavbarState extends State<Navbar> {
           ],
         ),
         bottomNavigationBar: WaterDropNavBar(
+          waterDropColor: ColorPalettes.primary,
           onItemSelected: (index) {
             setState(() {
               selectedIndex = index;
