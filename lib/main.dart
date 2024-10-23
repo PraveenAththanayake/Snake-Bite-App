@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:snake_bite_app/core/common/widgets/navbar/navbar.dart';
 import 'package:snake_bite_app/core/theme/theme.dart';
 
 void main() {
@@ -12,29 +13,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: AppTheme.lightThemeMode,
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('Flutter Demo'),
-        ),
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Text(
-                'Hello World!',
-                style: TextStyle(fontSize: 24),
-              ),
-              SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: () {
-                  print('Button Clicked');
-                },
-                child: Text('Click Me'),
-              ),
-            ],
-          ),
-        ),
-      ),
+      home: Navbar(),
     );
   }
 }
