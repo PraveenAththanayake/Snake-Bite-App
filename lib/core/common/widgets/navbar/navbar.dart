@@ -1,11 +1,13 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:lucide_icons/lucide_icons.dart';
 import 'package:snake_bite_app/core/theme/color_palette.dart';
 import 'package:snake_bite_app/features/history/history.dart';
 import 'package:snake_bite_app/features/home/home.dart';
 import 'package:snake_bite_app/features/settings/settings.dart';
 import 'package:snake_bite_app/features/support/support.dart';
-import 'package:water_drop_nav_bar/water_drop_nav_bar.dart';
+import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 
 class Navbar extends StatefulWidget {
   const Navbar({Key? key}) : super(key: key);
@@ -15,8 +17,51 @@ class Navbar extends StatefulWidget {
 }
 
 class _NavbarState extends State<Navbar> {
-  int selectedIndex = 0;
-  final PageController pageController = PageController();
+  late PersistentTabController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = PersistentTabController(initialIndex: 0);
+  }
+
+  List<Widget> _buildScreens() {
+    return [
+      HomeScreen(),
+      HistoryScreen(),
+      SupportScreen(),
+      SettingsScreen(),
+    ];
+  }
+
+  List<PersistentBottomNavBarItem> _navBarsItems() {
+    return [
+      PersistentBottomNavBarItem(
+        icon: const Icon(LucideIcons.home),
+        title: "Home",
+        activeColorPrimary: ColorPalettes.accent,
+        inactiveColorPrimary: ColorPalettes.accent.withOpacity(0.5),
+      ),
+      PersistentBottomNavBarItem(
+        icon: const Icon(LucideIcons.history),
+        title: "History",
+        activeColorPrimary: ColorPalettes.accent,
+        inactiveColorPrimary: ColorPalettes.accent.withOpacity(0.5),
+      ),
+      PersistentBottomNavBarItem(
+        icon: const Icon(LucideIcons.helpCircle),
+        title: "Support",
+        activeColorPrimary: ColorPalettes.accent,
+        inactiveColorPrimary: ColorPalettes.accent.withOpacity(0.5),
+      ),
+      PersistentBottomNavBarItem(
+        icon: const Icon(LucideIcons.settings),
+        title: "Settings",
+        activeColorPrimary: ColorPalettes.accent,
+        inactiveColorPrimary: ColorPalettes.accent.withOpacity(0.5),
+      ),
+    ];
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,47 +71,30 @@ class _NavbarState extends State<Navbar> {
         systemNavigationBarIconBrightness: Brightness.dark,
       ),
       child: Scaffold(
-        body: PageView(
-          physics: const NeverScrollableScrollPhysics(),
-          controller: pageController,
-          children: const [
-            HomeScreen(),
-            HistoryScreen(),
-            SupportScreen(),
-            SettingsScreen()
-          ],
-        ),
-        bottomNavigationBar: WaterDropNavBar(
-          waterDropColor: ColorPalettes.primary,
-          onItemSelected: (index) {
-            setState(() {
-              selectedIndex = index;
-            });
-            pageController.animateToPage(
-              selectedIndex,
-              duration: const Duration(milliseconds: 400),
-              curve: Curves.easeOutQuad,
-            );
-          },
-          selectedIndex: selectedIndex,
-          barItems: [
-            BarItem(
-              filledIcon: Icons.home_rounded,
-              outlinedIcon: Icons.home_outlined,
+        body: PersistentTabView(
+          context,
+          controller: _controller,
+          screens: _buildScreens(),
+          items: _navBarsItems(),
+          handleAndroidBackButtonPress: true,
+          resizeToAvoidBottomInset: true,
+          stateManagement: true,
+          hideNavigationBarWhenKeyboardAppears: true,
+          padding: const EdgeInsets.only(top: 8),
+          backgroundColor: ColorPalettes.primary,
+          navBarStyle: NavBarStyle.style19,
+          animationSettings: const NavBarAnimationSettings(
+            navBarItemAnimation: ItemAnimationSettings(
+              duration: Duration(milliseconds: 400),
+              curve: Curves.ease,
             ),
-            BarItem(
-              filledIcon: Icons.history_rounded,
-              outlinedIcon: Icons.history_outlined,
+            screenTransitionAnimation: ScreenTransitionAnimationSettings(
+              animateTabTransition: true,
+              duration: Duration(milliseconds: 200),
+              screenTransitionAnimationType:
+                  ScreenTransitionAnimationType.fadeIn,
             ),
-            BarItem(
-              filledIcon: Icons.support_rounded,
-              outlinedIcon: Icons.support_outlined,
-            ),
-            BarItem(
-              filledIcon: Icons.settings_rounded,
-              outlinedIcon: Icons.settings_outlined,
-            ),
-          ],
+          ),
         ),
       ),
     );
