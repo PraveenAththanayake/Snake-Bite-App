@@ -5,6 +5,7 @@ import 'package:snake_bite_app/core/common/widgets/buttons/custom_button.dart';
 import 'package:snake_bite_app/core/constants/images_strings.dart';
 import 'package:snake_bite_app/core/constants/text_string.dart';
 import 'package:snake_bite_app/core/theme/color_palette.dart';
+import 'package:snake_bite_app/features/capture/capture.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -20,7 +21,7 @@ class HomeScreen extends StatelessWidget {
             children: [
               Container(
                 width: double.infinity,
-                height: 500,
+                height: MediaQuery.of(context).size.height * 0.5,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(16.0),
                 ),
@@ -38,7 +39,12 @@ class HomeScreen extends StatelessWidget {
                     icon: LucideIcons.upload,
                     tooltip: 'Upload Image',
                     onPressed: () {
-                      // Handle upload image button press
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const CaptureScreen(),
+                        ),
+                      );
                     },
                   ),
                   CircleButton(
