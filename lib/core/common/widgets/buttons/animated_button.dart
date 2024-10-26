@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:lucide_icons/lucide_icons.dart';
 import 'package:snake_bite_app/core/theme/color_palette.dart';
 
 class AnimatedButton extends StatefulWidget {
@@ -15,6 +14,7 @@ class AnimatedButton extends StatefulWidget {
   });
 
   @override
+  // ignore: library_private_types_in_public_api
   _AnimatedButtonState createState() => _AnimatedButtonState();
 }
 

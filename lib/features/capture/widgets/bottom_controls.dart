@@ -2,7 +2,6 @@
 import 'package:flutter/material.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:snake_bite_app/core/common/widgets/buttons/circle_button.dart';
-import 'package:snake_bite_app/core/common/widgets/buttons/custom_button.dart';
 import 'package:snake_bite_app/core/constants/text_string.dart';
 
 class BottomControls extends StatelessWidget {
@@ -61,14 +60,13 @@ class BottomControls extends StatelessWidget {
               indent: 10,
               endIndent: 10,
             ),
-            Expanded(
+            const Expanded(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const Icon(LucideIcons.phoneCall, color: Colors.green),
-                  const SizedBox(height: 4),
-                  const Text("Call",
-                      style: TextStyle(fontWeight: FontWeight.w500)),
+                  Icon(LucideIcons.phoneCall, color: Colors.green),
+                  SizedBox(height: 4),
+                  Text("Call", style: TextStyle(fontWeight: FontWeight.w500)),
                 ],
               ),
             ),

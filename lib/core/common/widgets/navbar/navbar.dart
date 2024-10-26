@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:lucide_icons/lucide_icons.dart';
@@ -13,6 +12,7 @@ class Navbar extends StatefulWidget {
   const Navbar({Key? key}) : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _NavbarState createState() => _NavbarState();
 }
 
@@ -27,10 +27,10 @@ class _NavbarState extends State<Navbar> {
 
   List<Widget> _buildScreens() {
     return [
-      HomeScreen(),
-      HistoryScreen(),
-      SupportScreen(),
-      SettingsScreen(),
+      const HomeScreen(),
+      const HistoryScreen(),
+      const SupportScreen(),
+      const SettingsScreen(),
     ];
   }
 

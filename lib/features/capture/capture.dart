@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:snake_bite_app/core/common/widgets/appbar/appbar.dart';
@@ -44,10 +45,14 @@ class _CaptureScreenState extends State<CaptureScreen> {
           _isCameraInitialized = true;
         });
       } catch (e) {
-        print("Error initializing camera: $e");
+        if (kDebugMode) {
+          print("Error initializing camera: $e");
+        }
       }
     } else {
-      print("Camera permission denied");
+      if (kDebugMode) {
+        print("Camera permission denied");
+      }
     }
   }
 
@@ -84,7 +89,7 @@ class _CaptureScreenState extends State<CaptureScreen> {
             ),
             const SizedBox(height: 20),
             // Information and Description Section
-            UploadInfo(),
+            const UploadInfo(),
             const SizedBox(height: 30),
             // Button Section
             Row(
@@ -103,7 +108,7 @@ class _CaptureScreenState extends State<CaptureScreen> {
               ],
             ),
             const SizedBox(height: 20),
-            BottomControls(),
+            const BottomControls(),
           ],
         ),
       ),

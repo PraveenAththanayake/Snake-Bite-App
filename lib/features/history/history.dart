@@ -10,7 +10,7 @@ class HistoryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(
+      appBar: const CustomAppBar(
         title: 'History',
       ),
       body: SingleChildScrollView(
@@ -33,7 +33,7 @@ class HistoryScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-                child: Icon(
+                child: const Icon(
                   LucideIcons.file,
                   color: ColorPalettes.primary,
                   size: 80,
@@ -142,7 +142,7 @@ class HistoryScreen extends StatelessWidget {
                 const SizedBox(height: 4),
                 Text(
                   desc,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.black54,
                     fontSize: 14,
                   ),

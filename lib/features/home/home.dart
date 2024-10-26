@@ -28,7 +28,7 @@ class HomeScreen extends StatelessWidget {
                 ),
                 clipBehavior: Clip.antiAlias,
                 child: Image.asset(
-                  TImageStrings.HomeBg,
+                  TImageStrings.homeBg,
                   fit: BoxFit.cover,
                 ),
               ),
@@ -65,7 +65,7 @@ class HomeScreen extends StatelessWidget {
               const SizedBox(height: 20),
               Text(
                 THomeScreenStrings.upload,
-                style: Theme.of(context).textTheme.headline5?.copyWith(
+                style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                       color: ColorPalettes.primary,
                       fontWeight: FontWeight.bold,
                     ),
@@ -74,7 +74,7 @@ class HomeScreen extends StatelessWidget {
               Text(
                 THomeScreenStrings.uploadDesc,
                 textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.bodyText1?.copyWith(
+                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                       color: Colors.black54,
                     ),
               ),

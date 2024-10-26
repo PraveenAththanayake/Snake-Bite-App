@@ -7,7 +7,7 @@ class UploadInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return const Column(
       children: [
         Text(
           TUploadScreenStrings.upload,
@@ -18,19 +18,19 @@ class UploadInfo extends StatelessWidget {
           ),
           textAlign: TextAlign.center,
         ),
-        const SizedBox(height: 8),
+        SizedBox(height: 8),
         Text(
           TUploadScreenStrings.uploadDesc,
-          style: const TextStyle(
+          style: TextStyle(
             fontSize: 16.0,
             color: Colors.black87,
           ),
           textAlign: TextAlign.center,
         ),
-        const SizedBox(height: 8),
+        SizedBox(height: 8),
         Text(
           TUploadScreenStrings.uploadSpanDesc,
-          style: const TextStyle(
+          style: TextStyle(
             fontSize: 16.0,
             color: Colors.black87,
           ),
