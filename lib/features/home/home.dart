@@ -6,6 +6,7 @@ import 'package:snake_bite_app/core/constants/images_strings.dart';
 import 'package:snake_bite_app/core/constants/text_string.dart';
 import 'package:snake_bite_app/core/theme/color_palette.dart';
 import 'package:snake_bite_app/features/capture/capture.dart';
+import 'package:snake_bite_app/features/result/result.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -51,7 +52,12 @@ class HomeScreen extends StatelessWidget {
                     icon: LucideIcons.camera,
                     tooltip: 'Open Camera',
                     onPressed: () {
-                      // Handle camera button press
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const ResultScreen(),
+                        ),
+                      );
                     },
                   ),
                 ],
