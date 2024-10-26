@@ -10,7 +10,7 @@ class SupportScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(title: 'Support'),
+      appBar: const CustomAppBar(title: 'Support'),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -25,8 +25,6 @@ class SupportScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 20),
-
-            // FAQs Section
             const Text(
               'Frequently Asked Questions',
               style: TextStyle(
@@ -55,8 +53,6 @@ class SupportScreen extends StatelessWidget {
                   'The terms of service can be found in the app settings under "Legal".',
             ),
             const SizedBox(height: 20),
-
-            // Contact Support Section
             const Text(
               'Contact Support',
               style: TextStyle(
@@ -77,8 +73,6 @@ class SupportScreen extends StatelessWidget {
               subtitle: Text('+1 234 567 890'),
             ),
             const SizedBox(height: 20),
-
-            // Feedback Section
             const Text(
               'Feedback',
               style: TextStyle(
