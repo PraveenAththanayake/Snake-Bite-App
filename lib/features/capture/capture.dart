@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:lucide_icons/lucide_icons.dart';
@@ -11,6 +12,7 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:snake_bite_app/features/capture/widgets/bottom_controls.dart';
 import 'package:snake_bite_app/features/capture/widgets/camera_preview.dart';
 import 'package:snake_bite_app/features/capture/widgets/upload_info.dart';
+import 'package:snake_bite_app/features/upload/upload.dart';
 
 class CaptureScreen extends StatefulWidget {
   const CaptureScreen({super.key});
@@ -22,6 +24,7 @@ class CaptureScreen extends StatefulWidget {
 class _CaptureScreenState extends State<CaptureScreen> {
   CameraController? _cameraController;
   bool _isCameraInitialized = false;
+  XFile? _capturedImage;
 
   @override
   void initState() {
@@ -56,6 +59,21 @@ class _CaptureScreenState extends State<CaptureScreen> {
     }
   }
 
+  Future<void> _captureImage() async {
+    if (_cameraController?.value.isInitialized == true) {
+      try {
+        final image = await _cameraController!.takePicture();
+        setState(() {
+          _capturedImage = image;
+        });
+      } catch (e) {
+        if (kDebugMode) {
+          print("Error capturing image: $e");
+        }
+      }
+    }
+  }
+
   @override
   void dispose() {
     _cameraController?.dispose();
@@ -80,36 +98,85 @@ class _CaptureScreenState extends State<CaptureScreen> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            CameraPreviewWidget(
-              cameraController: _cameraController,
-              isInitialized: _isCameraInitialized,
-            ),
-            const SizedBox(height: 20),
-            // Information and Description Section
-            const UploadInfo(),
-            const SizedBox(height: 30),
-            // Button Section
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                CircleButton(
-                  icon: LucideIcons.plus,
-                  tooltip: TUploadScreenStrings.label,
-                  onPressed: () {},
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              CameraPreviewWidget(
+                cameraController: _cameraController,
+                isInitialized: _isCameraInitialized,
+              ),
+              const SizedBox(height: 20),
+              if (_capturedImage != null) ...[
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(16.0),
+                  child: Image.file(
+                    File(_capturedImage!.path),
+                    height: 200,
+                    width: 200,
+                    fit: BoxFit.cover,
+                  ),
                 ),
-                const SizedBox(width: 20),
-                CustomButton(
-                  text: TUploadScreenStrings.label,
-                  onPressed: () {},
-                ),
+                const SizedBox(height: 10),
               ],
-            ),
-            const SizedBox(height: 20),
-            const BottomControls(),
-          ],
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  CircleButton(
+                    icon: LucideIcons.camera,
+                    tooltip: 'Capture Image',
+                    onPressed: _captureImage,
+                  ),
+                  const SizedBox(width: 20),
+                  if (_capturedImage != null) ...[
+                    CircleButton(
+                      icon: LucideIcons.upload,
+                      tooltip: 'Upload Image',
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                UploadScreen(imagePath: _capturedImage!.path),
+                          ),
+                        );
+                      },
+                    ),
+                  ],
+                ],
+              ),
+              const SizedBox(height: 20),
+              const UploadInfo(),
+              const SizedBox(height: 30),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  CircleButton(
+                    icon: LucideIcons.plus,
+                    tooltip: TUploadScreenStrings.label,
+                    onPressed: () {},
+                  ),
+                  const SizedBox(width: 20),
+                  CustomButton(
+                    text: TUploadScreenStrings.label,
+                    onPressed: () {
+                      if (_capturedImage != null) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                UploadScreen(imagePath: _capturedImage!.path),
+                          ),
+                        );
+                      }
+                    },
+                  ),
+                ],
+              ),
+              const SizedBox(height: 20),
+              const BottomControls(),
+            ],
+          ),
         ),
       ),
     );
