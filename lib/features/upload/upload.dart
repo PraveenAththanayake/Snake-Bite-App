@@ -174,7 +174,7 @@ class _UploadScreenState extends State<UploadScreen> {
                         CircleButton(
                           icon: LucideIcons.refreshCw,
                           tooltip: 'Reset Image',
-                          onPressed: _resetImage,
+                          onPressed: _pickImage,
                         ),
                       ],
                     ),
