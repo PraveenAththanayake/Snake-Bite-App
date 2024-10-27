@@ -4,51 +4,36 @@ import 'package:snake_bite_app/core/theme/color_palette.dart';
 class SnakeTypeCard extends StatelessWidget {
   final String imagePath;
   final String text;
-  final bool isSelected;
-  final VoidCallback onTap;
+  final Color color;
 
   const SnakeTypeCard({
     Key? key,
     required this.imagePath,
     required this.text,
-    required this.isSelected,
-    required this.onTap,
+    required this.color,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Column(
-        children: [
-          _buildImageCard(),
-          const SizedBox(height: 16),
-          _buildTextCard(),
-        ],
-      ),
+    return Column(
+      children: [
+        _buildImageCard(context),
+        const SizedBox(height: 16),
+        _buildTextCard(context),
+      ],
     );
   }
 
-  Widget _buildImageCard() {
+  Widget _buildImageCard(context) {
     return Container(
-      height: 160,
-      width: 160,
+      height: MediaQuery.of(context).size.height * 0.15,
+      width: MediaQuery.of(context).size.width * 0.35,
       decoration: BoxDecoration(
         gradient: LinearGradient(
-          colors: isSelected
-              ? (text == 'Non-Venomous'
-                  ? [
-                      Colors.green.withOpacity(0.8),
-                      Colors.greenAccent.withOpacity(0.8)
-                    ]
-                  : [
-                      Colors.red.withOpacity(0.8),
-                      Colors.redAccent.withOpacity(0.8)
-                    ])
-              : [
-                  ColorPalettes.primary.withOpacity(0.8),
-                  ColorPalettes.secondary.withOpacity(0.8)
-                ],
+          colors: [
+            color.withOpacity(0.8),
+            color.withOpacity(0.8),
+          ],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
@@ -71,14 +56,12 @@ class SnakeTypeCard extends StatelessWidget {
     );
   }
 
-  Widget _buildTextCard() {
+  Widget _buildTextCard(BuildContext context) {
     return Container(
-      width: 160,
+      width: MediaQuery.of(context).size.width * 0.35,
       padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
       decoration: BoxDecoration(
-        color: isSelected
-            ? (text == 'Non-Venomous' ? Colors.green : Colors.red)
-            : ColorPalettes.background,
+        color: color,
         border: Border.all(
           color: ColorPalettes.primary,
           width: 2,
@@ -96,7 +79,7 @@ class SnakeTypeCard extends StatelessWidget {
         child: Text(
           text,
           style: TextStyle(
-            color: isSelected ? Colors.white : ColorPalettes.primary,
+            color: Colors.white,
             fontSize: 16,
             fontWeight: FontWeight.w600,
             letterSpacing: 1.1,
