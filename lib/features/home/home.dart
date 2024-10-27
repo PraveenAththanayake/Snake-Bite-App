@@ -1,15 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:lucide_icons/lucide_icons.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:snake_bite_app/core/common/widgets/buttons/circle_button.dart';
 import 'package:snake_bite_app/core/common/widgets/buttons/custom_button.dart';
 import 'package:snake_bite_app/core/constants/images_strings.dart';
 import 'package:snake_bite_app/core/constants/text_string.dart';
 import 'package:snake_bite_app/core/theme/color_palette.dart';
 import 'package:snake_bite_app/features/capture/capture.dart';
-import 'package:snake_bite_app/features/result/result.dart';
+import 'package:snake_bite_app/features/upload/upload.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
+
+  Future<void> _pickImage(BuildContext context) async {
+    try {
+      final ImagePicker picker = ImagePicker();
+      final XFile? image = await picker.pickImage(source: ImageSource.gallery);
+
+      if (image != null) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => UploadScreen(imagePath: image.path),
+          ),
+        );
+      }
+    } catch (e) {
+      print("Error picking image: $e");
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Failed to pick image')),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,14 +61,7 @@ class HomeScreen extends StatelessWidget {
                   CircleButton(
                     icon: LucideIcons.upload,
                     tooltip: 'Upload Image',
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const CaptureScreen(),
-                        ),
-                      );
-                    },
+                    onPressed: () => _pickImage(context),
                   ),
                   CircleButton(
                     icon: LucideIcons.camera,
@@ -55,7 +70,7 @@ class HomeScreen extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const ResultScreen(),
+                          builder: (context) => const CaptureScreen(),
                         ),
                       );
                     },
@@ -80,7 +95,9 @@ class HomeScreen extends StatelessWidget {
               ),
               const SizedBox(height: 20),
               CustomButton(
-                  text: THomeScreenStrings.uploadButton, onPressed: () {})
+                text: THomeScreenStrings.uploadButton,
+                onPressed: () {},
+              ),
             ],
           ),
         ),

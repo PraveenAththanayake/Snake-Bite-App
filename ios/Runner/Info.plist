@@ -28,6 +28,13 @@
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
+	<key>NSCameraUsageDescription</key>
+	<string>We need access to the camera for capturing images.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>We need access to your photos for uploading.</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>We need to save images to your library.</string>
+
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

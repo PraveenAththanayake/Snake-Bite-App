@@ -8,7 +8,8 @@ import 'package:snake_bite_app/features/result/widgets/snake_type_card.dart';
 import 'package:snake_bite_app/features/result/widgets/symptom_checkbox.dart';
 
 class ResultScreen extends StatefulWidget {
-  const ResultScreen({super.key});
+  final String predictedClass;
+  const ResultScreen({super.key, required this.predictedClass});
 
   @override
   State<ResultScreen> createState() => _ResultScreenState();
