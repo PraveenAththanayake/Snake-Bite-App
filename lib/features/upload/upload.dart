@@ -6,9 +6,9 @@ import 'package:image_cropper/image_cropper.dart';
 import 'package:snake_bite_app/core/common/widgets/appbar/appbar.dart';
 import 'package:snake_bite_app/core/common/widgets/buttons/animated_button.dart';
 import 'package:snake_bite_app/core/common/widgets/buttons/circle_button.dart';
-import 'package:snake_bite_app/core/common/widgets/buttons/custom_button.dart';
 import 'package:snake_bite_app/core/theme/color_palette.dart';
 import 'package:snake_bite_app/core/services/image_service.dart';
+import 'package:snake_bite_app/features/capture/capture.dart';
 
 class UploadScreen extends StatefulWidget {
   final String imagePath;
@@ -175,6 +175,19 @@ class _UploadScreenState extends State<UploadScreen> {
                           icon: LucideIcons.refreshCw,
                           tooltip: 'Reset Image',
                           onPressed: _pickImage,
+                        ),
+                        const SizedBox(width: 10),
+                        CircleButton(
+                          icon: LucideIcons.camera,
+                          tooltip: 'Capture Image',
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const CaptureScreen(),
+                              ),
+                            );
+                          },
                         ),
                       ],
                     ),

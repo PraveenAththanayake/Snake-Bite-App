@@ -96,7 +96,7 @@ class HomeScreen extends StatelessWidget {
               const SizedBox(height: 20),
               CustomButton(
                 text: THomeScreenStrings.uploadButton,
-                onPressed: () {},
+                onPressed: () => _pickImage(context),
               ),
             ],
           ),
